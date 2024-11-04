@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="392885ccee7b484b9b97e548bc06db70" Name="Diagram1">
+        <EntityTypeShape EntityType="InvenSyncModel.categorias" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.clientes" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.descuentos_clientes" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.factura_producto_compra" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.factura_producto_venta" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.facturas_compras" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.facturas_ventas" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.marcas" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.migrations" Width="1.5" PointX="7.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.password_resets" Width="1.5" PointX="7.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.productos" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.proveedores" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.tipos_facturas" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.users" Width="1.5" PointX="9.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvenSyncModel.vendedores" Width="1.5" PointX="0.75" PointY="20.25" IsExpanded="true" />
+        <AssociationConnector Association="InvenSyncModel.FK__productos__categ__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__descuento__clien__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__facturas___clien__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__factura_p__factu__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__factura_p__produ__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__factura_p__produ__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__factura_p__updat__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__facturas___prove__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__facturas___tipo___04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__facturas___vende__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__productos__marca__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="InvenSyncModel.FK__productos__prove__71D1E811" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InvenSyncModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_cliente" Type="varchar" MaxLength="100" />
+          <Property Name="direccion_cliente" Type="varchar" MaxLength="191" />
+          <Property Name="telefono_cliente" Type="varchar" MaxLength="45" />
+          <Property Name="email_cliente" Type="varchar" MaxLength="100" />
+          <Property Name="descuento" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="descuentos_clientes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente_id" Type="int" />
+          <Property Name="porcentaje_descuento" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="factura_producto_compra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cantidad" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="factura_compras_id" Type="int" />
+          <Property Name="producto_id" Type="int" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="factura_producto_venta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cantidad" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="factura_ventas_id" Type="int" />
+          <Property Name="producto_id" Type="int" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="facturas_compras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_factura" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_factura" Type="date" />
+          <Property Name="estado_factura" Type="varchar" MaxLength="50" />
+          <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="proveedor_id" Type="int" />
+        </EntityType>
+        <EntityType Name="facturas_ventas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_factura" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_factura" Type="date" />
+          <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="estado_factura" Type="varchar" MaxLength="50" />
+          <Property Name="cliente_id" Type="int" />
+          <Property Name="vendedor_id" Type="int" />
+          <Property Name="tipo_factura_id" Type="int" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="marcas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_marca" Type="varchar" MaxLength="45" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="migrations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="migration" Type="varchar" MaxLength="191" />
+          <Property Name="batch" Type="int" />
+        </EntityType>
+        <EntityType Name="password_resets">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="varchar" MaxLength="191" Nullable="false" />
+          <Property Name="token" Type="varchar" MaxLength="191" />
+          <Property Name="created_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_original" Type="varchar" MaxLength="20" />
+          <Property Name="codigo_alterno" Type="varchar" MaxLength="20" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="precio_compra" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="precio_venta" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="aplicacion" Type="varchar(max)" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="unidad_medida" Type="varchar" MaxLength="10" />
+          <Property Name="numero_rack" Type="int" />
+          <Property Name="categoria_id" Type="int" />
+          <Property Name="marca_id" Type="int" />
+          <Property Name="proveedor_id" Type="int" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="proveedores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_proveedor" Type="varchar" MaxLength="100" />
+          <Property Name="direccion_proveedor" Type="varchar" MaxLength="191" />
+          <Property Name="telefono_proveedor" Type="varchar" MaxLength="45" />
+          <Property Name="email_proveedor" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tipos_facturas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_factura_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="191" />
+          <Property Name="email" Type="varchar" MaxLength="191" />
+          <Property Name="passwords" Type="varchar" MaxLength="191" />
+          <Property Name="remember_token" Type="varchar" MaxLength="100" />
+          <Property Name="user_type" Type="varchar" MaxLength="50" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="vendedores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_vendedor" Type="varchar" MaxLength="100" />
+          <Property Name="direccion_vendedor" Type="varchar" MaxLength="191" />
+          <Property Name="telefono_vendedor" Type="varchar" MaxLength="45" />
+          <Property Name="email_vendedor" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__descuento__clien__0D7A0286">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+          <End Role="descuentos_clientes" Type="Self.descuentos_clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="descuentos_clientes">
+              <PropertyRef Name="cliente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__factura_p__factu__7A672E12">
+          <End Role="facturas_compras" Type="Self.facturas_compras" Multiplicity="0..1" />
+          <End Role="factura_producto_compra" Type="Self.factura_producto_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facturas_compras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="factura_producto_compra">
+              <PropertyRef Name="factura_compras_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__factura_p__produ__09A971A2">
+          <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+          <End Role="factura_producto_venta" Type="Self.factura_producto_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="factura_producto_venta">
+              <PropertyRef Name="producto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__factura_p__produ__7B5B524B">
+          <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+          <End Role="factura_producto_compra" Type="Self.factura_producto_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="factura_producto_compra">
+              <PropertyRef Name="producto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__factura_p__updat__08B54D69">
+          <End Role="facturas_ventas" Type="Self.facturas_ventas" Multiplicity="0..1" />
+          <End Role="factura_producto_venta" Type="Self.factura_producto_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facturas_ventas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="factura_producto_venta">
+              <PropertyRef Name="factura_ventas_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturas___clien__02FC7413">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+          <End Role="facturas_ventas" Type="Self.facturas_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturas_ventas">
+              <PropertyRef Name="cliente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturas___prove__76969D2E">
+          <End Role="proveedores" Type="Self.proveedores" Multiplicity="0..1" />
+          <End Role="facturas_compras" Type="Self.facturas_compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturas_compras">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturas___tipo___04E4BC85">
+          <End Role="tipos_facturas" Type="Self.tipos_facturas" Multiplicity="0..1" />
+          <End Role="facturas_ventas" Type="Self.facturas_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos_facturas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturas_ventas">
+              <PropertyRef Name="tipo_factura_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturas___vende__03F0984C">
+          <End Role="vendedores" Type="Self.vendedores" Multiplicity="0..1" />
+          <End Role="facturas_ventas" Type="Self.facturas_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturas_ventas">
+              <PropertyRef Name="vendedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productos__categ__6FE99F9F">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productos__marca__70DDC3D8">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="marca_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productos__prove__71D1E811">
+          <End Role="proveedores" Type="Self.proveedores" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="InvenSyncModelStoreContainer">
+          <EntitySet Name="categorias" EntityType="Self.categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="descuentos_clientes" EntityType="Self.descuentos_clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="factura_producto_compra" EntityType="Self.factura_producto_compra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="factura_producto_venta" EntityType="Self.factura_producto_venta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="facturas_compras" EntityType="Self.facturas_compras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="facturas_ventas" EntityType="Self.facturas_ventas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="marcas" EntityType="Self.marcas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="migrations" EntityType="Self.migrations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="password_resets" EntityType="Self.password_resets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productos" EntityType="Self.productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proveedores" EntityType="Self.proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipos_facturas" EntityType="Self.tipos_facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vendedores" EntityType="Self.vendedores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__descuento__clien__0D7A0286" Association="Self.FK__descuento__clien__0D7A0286">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="descuentos_clientes" EntitySet="descuentos_clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__factura_p__factu__7A672E12" Association="Self.FK__factura_p__factu__7A672E12">
+            <End Role="facturas_compras" EntitySet="facturas_compras" />
+            <End Role="factura_producto_compra" EntitySet="factura_producto_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__factura_p__produ__09A971A2" Association="Self.FK__factura_p__produ__09A971A2">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="factura_producto_venta" EntitySet="factura_producto_venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__factura_p__produ__7B5B524B" Association="Self.FK__factura_p__produ__7B5B524B">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="factura_producto_compra" EntitySet="factura_producto_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__factura_p__updat__08B54D69" Association="Self.FK__factura_p__updat__08B54D69">
+            <End Role="facturas_ventas" EntitySet="facturas_ventas" />
+            <End Role="factura_producto_venta" EntitySet="factura_producto_venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturas___clien__02FC7413" Association="Self.FK__facturas___clien__02FC7413">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="facturas_ventas" EntitySet="facturas_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturas___prove__76969D2E" Association="Self.FK__facturas___prove__76969D2E">
+            <End Role="proveedores" EntitySet="proveedores" />
+            <End Role="facturas_compras" EntitySet="facturas_compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturas___tipo___04E4BC85" Association="Self.FK__facturas___tipo___04E4BC85">
+            <End Role="tipos_facturas" EntitySet="tipos_facturas" />
+            <End Role="facturas_ventas" EntitySet="facturas_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturas___vende__03F0984C" Association="Self.FK__facturas___vende__03F0984C">
+            <End Role="vendedores" EntitySet="vendedores" />
+            <End Role="facturas_ventas" EntitySet="facturas_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productos__categ__6FE99F9F" Association="Self.FK__productos__categ__6FE99F9F">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productos__marca__70DDC3D8" Association="Self.FK__productos__marca__70DDC3D8">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productos__prove__71D1E811" Association="Self.FK__productos__prove__71D1E811">
+            <End Role="proveedores" EntitySet="proveedores" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InvenSyncModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="productos" Relationship="Self.FK__productos__categ__6FE99F9F" FromRole="categorias" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion_cliente" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_cliente" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="email_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descuento" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="descuentos_clientes" Relationship="Self.FK__descuento__clien__0D7A0286" FromRole="clientes" ToRole="descuentos_clientes" />
+          <NavigationProperty Name="facturas_ventas" Relationship="Self.FK__facturas___clien__02FC7413" FromRole="clientes" ToRole="facturas_ventas" />
+        </EntityType>
+        <EntityType Name="descuentos_clientes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente_id" Type="Int32" />
+          <Property Name="porcentaje_descuento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="clientes" Relationship="Self.FK__descuento__clien__0D7A0286" FromRole="descuentos_clientes" ToRole="clientes" />
+        </EntityType>
+        <EntityType Name="factura_producto_compra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="factura_compras_id" Type="Int32" />
+          <Property Name="producto_id" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="facturas_compras" Relationship="Self.FK__factura_p__factu__7A672E12" FromRole="factura_producto_compra" ToRole="facturas_compras" />
+          <NavigationProperty Name="productos" Relationship="Self.FK__factura_p__produ__7B5B524B" FromRole="factura_producto_compra" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="factura_producto_venta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="factura_ventas_id" Type="Int32" />
+          <Property Name="producto_id" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="productos" Relationship="Self.FK__factura_p__produ__09A971A2" FromRole="factura_producto_venta" ToRole="productos" />
+          <NavigationProperty Name="facturas_ventas" Relationship="Self.FK__factura_p__updat__08B54D69" FromRole="factura_producto_venta" ToRole="facturas_ventas" />
+        </EntityType>
+        <EntityType Name="facturas_compras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_factura" Type="DateTime" Precision="0" />
+          <Property Name="estado_factura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="proveedor_id" Type="Int32" />
+          <NavigationProperty Name="factura_producto_compra" Relationship="Self.FK__factura_p__factu__7A672E12" FromRole="facturas_compras" ToRole="factura_producto_compra" />
+          <NavigationProperty Name="proveedores" Relationship="Self.FK__facturas___prove__76969D2E" FromRole="facturas_compras" ToRole="proveedores" />
+        </EntityType>
+        <EntityType Name="facturas_ventas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_factura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_factura" Type="DateTime" Precision="0" />
+          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="estado_factura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_id" Type="Int32" />
+          <Property Name="vendedor_id" Type="Int32" />
+          <Property Name="tipo_factura_id" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="clientes" Relationship="Self.FK__facturas___clien__02FC7413" FromRole="facturas_ventas" ToRole="clientes" />
+          <NavigationProperty Name="factura_producto_venta" Relationship="Self.FK__factura_p__updat__08B54D69" FromRole="facturas_ventas" ToRole="factura_producto_venta" />
+          <NavigationProperty Name="tipos_facturas" Relationship="Self.FK__facturas___tipo___04E4BC85" FromRole="facturas_ventas" ToRole="tipos_facturas" />
+          <NavigationProperty Name="vendedores" Relationship="Self.FK__facturas___vende__03F0984C" FromRole="facturas_ventas" ToRole="vendedores" />
+        </EntityType>
+        <EntityType Name="marcas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_marca" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="productos" Relationship="Self.FK__productos__marca__70DDC3D8" FromRole="marcas" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="migrations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="migration" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="batch" Type="Int32" />
+        </EntityType>
+        <EntityType Name="password_resets">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="token" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_original" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_alterno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="precio_compra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="precio_venta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="aplicacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="unidad_medida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="numero_rack" Type="Int32" />
+          <Property Name="categoria_id" Type="Int32" />
+          <Property Name="marca_id" Type="Int32" />
+          <Property Name="proveedor_id" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="categorias" Relationship="Self.FK__productos__categ__6FE99F9F" FromRole="productos" ToRole="categorias" />
+          <NavigationProperty Name="factura_producto_compra" Relationship="Self.FK__factura_p__produ__7B5B524B" FromRole="productos" ToRole="factura_producto_compra" />
+          <NavigationProperty Name="factura_producto_venta" Relationship="Self.FK__factura_p__produ__09A971A2" FromRole="productos" ToRole="factura_producto_venta" />
+          <NavigationProperty Name="marcas" Relationship="Self.FK__productos__marca__70DDC3D8" FromRole="productos" ToRole="marcas" />
+          <NavigationProperty Name="proveedores" Relationship="Self.FK__productos__prove__71D1E811" FromRole="productos" ToRole="proveedores" />
+        </EntityType>
+        <EntityType Name="proveedores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_proveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion_proveedor" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_proveedor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="email_proveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="facturas_compras" Relationship="Self.FK__facturas___prove__76969D2E" FromRole="proveedores" ToRole="facturas_compras" />
+          <NavigationProperty Name="productos" Relationship="Self.FK__productos__prove__71D1E811" FromRole="proveedores" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tipos_facturas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_factura_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="facturas_ventas" Relationship="Self.FK__facturas___tipo___04E4BC85" FromRole="tipos_facturas" ToRole="facturas_ventas" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="passwords" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="remember_token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="user_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="vendedores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_vendedor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion_vendedor" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_vendedor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="email_vendedor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="facturas_ventas" Relationship="Self.FK__facturas___vende__03F0984C" FromRole="vendedores" ToRole="facturas_ventas" />
+        </EntityType>
+        <Association Name="FK__productos__categ__6FE99F9F">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__descuento__clien__0D7A0286">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+          <End Role="descuentos_clientes" Type="Self.descuentos_clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="descuentos_clientes">
+              <PropertyRef Name="cliente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturas___clien__02FC7413">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+          <End Role="facturas_ventas" Type="Self.facturas_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturas_ventas">
+              <PropertyRef Name="cliente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__factura_p__factu__7A672E12">
+          <End Role="facturas_compras" Type="Self.facturas_compras" Multiplicity="0..1" />
+          <End Role="factura_producto_compra" Type="Self.factura_producto_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facturas_compras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="factura_producto_compra">
+              <PropertyRef Name="factura_compras_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__factura_p__produ__7B5B524B">
+          <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+          <End Role="factura_producto_compra" Type="Self.factura_producto_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="factura_producto_compra">
+              <PropertyRef Name="producto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__factura_p__produ__09A971A2">
+          <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+          <End Role="factura_producto_venta" Type="Self.factura_producto_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="factura_producto_venta">
+              <PropertyRef Name="producto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__factura_p__updat__08B54D69">
+          <End Role="facturas_ventas" Type="Self.facturas_ventas" Multiplicity="0..1" />
+          <End Role="factura_producto_venta" Type="Self.factura_producto_venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facturas_ventas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="factura_producto_venta">
+              <PropertyRef Name="factura_ventas_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturas___prove__76969D2E">
+          <End Role="proveedores" Type="Self.proveedores" Multiplicity="0..1" />
+          <End Role="facturas_compras" Type="Self.facturas_compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturas_compras">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturas___tipo___04E4BC85">
+          <End Role="tipos_facturas" Type="Self.tipos_facturas" Multiplicity="0..1" />
+          <End Role="facturas_ventas" Type="Self.facturas_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos_facturas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturas_ventas">
+              <PropertyRef Name="tipo_factura_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturas___vende__03F0984C">
+          <End Role="vendedores" Type="Self.vendedores" Multiplicity="0..1" />
+          <End Role="facturas_ventas" Type="Self.facturas_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturas_ventas">
+              <PropertyRef Name="vendedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productos__marca__70DDC3D8">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="marca_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productos__prove__71D1E811">
+          <End Role="proveedores" Type="Self.proveedores" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InvenSyncEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categorias" EntityType="Self.categorias" />
+          <EntitySet Name="clientes" EntityType="Self.clientes" />
+          <EntitySet Name="descuentos_clientes" EntityType="Self.descuentos_clientes" />
+          <EntitySet Name="factura_producto_compra" EntityType="Self.factura_producto_compra" />
+          <EntitySet Name="factura_producto_venta" EntityType="Self.factura_producto_venta" />
+          <EntitySet Name="facturas_compras" EntityType="Self.facturas_compras" />
+          <EntitySet Name="facturas_ventas" EntityType="Self.facturas_ventas" />
+          <EntitySet Name="marcas" EntityType="Self.marcas" />
+          <EntitySet Name="migrations" EntityType="Self.migrations" />
+          <EntitySet Name="password_resets" EntityType="Self.password_resets" />
+          <EntitySet Name="productos" EntityType="Self.productos" />
+          <EntitySet Name="proveedores" EntityType="Self.proveedores" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tipos_facturas" EntityType="Self.tipos_facturas" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="vendedores" EntityType="Self.vendedores" />
+          <AssociationSet Name="FK__productos__categ__6FE99F9F" Association="Self.FK__productos__categ__6FE99F9F">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__descuento__clien__0D7A0286" Association="Self.FK__descuento__clien__0D7A0286">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="descuentos_clientes" EntitySet="descuentos_clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturas___clien__02FC7413" Association="Self.FK__facturas___clien__02FC7413">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="facturas_ventas" EntitySet="facturas_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__factura_p__factu__7A672E12" Association="Self.FK__factura_p__factu__7A672E12">
+            <End Role="facturas_compras" EntitySet="facturas_compras" />
+            <End Role="factura_producto_compra" EntitySet="factura_producto_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__factura_p__produ__7B5B524B" Association="Self.FK__factura_p__produ__7B5B524B">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="factura_producto_compra" EntitySet="factura_producto_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__factura_p__produ__09A971A2" Association="Self.FK__factura_p__produ__09A971A2">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="factura_producto_venta" EntitySet="factura_producto_venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__factura_p__updat__08B54D69" Association="Self.FK__factura_p__updat__08B54D69">
+            <End Role="facturas_ventas" EntitySet="facturas_ventas" />
+            <End Role="factura_producto_venta" EntitySet="factura_producto_venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturas___prove__76969D2E" Association="Self.FK__facturas___prove__76969D2E">
+            <End Role="proveedores" EntitySet="proveedores" />
+            <End Role="facturas_compras" EntitySet="facturas_compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturas___tipo___04E4BC85" Association="Self.FK__facturas___tipo___04E4BC85">
+            <End Role="tipos_facturas" EntitySet="tipos_facturas" />
+            <End Role="facturas_ventas" EntitySet="facturas_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturas___vende__03F0984C" Association="Self.FK__facturas___vende__03F0984C">
+            <End Role="vendedores" EntitySet="vendedores" />
+            <End Role="facturas_ventas" EntitySet="facturas_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productos__marca__70DDC3D8" Association="Self.FK__productos__marca__70DDC3D8">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productos__prove__71D1E811" Association="Self.FK__productos__prove__71D1E811">
+            <End Role="proveedores" EntitySet="proveedores" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(InvenSyncModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(InvenSyncModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InvenSyncModelStoreContainer" CdmEntityContainer="InvenSyncEntity">
+          <EntitySetMapping Name="categorias">
+            <EntityTypeMapping TypeName="InvenSyncModel.categorias">
+              <MappingFragment StoreEntitySet="categorias">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clientes">
+            <EntityTypeMapping TypeName="InvenSyncModel.clientes">
+              <MappingFragment StoreEntitySet="clientes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="direccion_cliente" ColumnName="direccion_cliente" />
+                <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+                <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="descuentos_clientes">
+            <EntityTypeMapping TypeName="InvenSyncModel.descuentos_clientes">
+              <MappingFragment StoreEntitySet="descuentos_clientes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="porcentaje_descuento" ColumnName="porcentaje_descuento" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="factura_producto_compra">
+            <EntityTypeMapping TypeName="InvenSyncModel.factura_producto_compra">
+              <MappingFragment StoreEntitySet="factura_producto_compra">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="factura_compras_id" ColumnName="factura_compras_id" />
+                <ScalarProperty Name="producto_id" ColumnName="producto_id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="factura_producto_venta">
+            <EntityTypeMapping TypeName="InvenSyncModel.factura_producto_venta">
+              <MappingFragment StoreEntitySet="factura_producto_venta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="factura_ventas_id" ColumnName="factura_ventas_id" />
+                <ScalarProperty Name="producto_id" ColumnName="producto_id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="facturas_compras">
+            <EntityTypeMapping TypeName="InvenSyncModel.facturas_compras">
+              <MappingFragment StoreEntitySet="facturas_compras">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="codigo_factura" ColumnName="codigo_factura" />
+                <ScalarProperty Name="fecha_factura" ColumnName="fecha_factura" />
+                <ScalarProperty Name="estado_factura" ColumnName="estado_factura" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="facturas_ventas">
+            <EntityTypeMapping TypeName="InvenSyncModel.facturas_ventas">
+              <MappingFragment StoreEntitySet="facturas_ventas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="codigo_factura" ColumnName="codigo_factura" />
+                <ScalarProperty Name="fecha_factura" ColumnName="fecha_factura" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="estado_factura" ColumnName="estado_factura" />
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="vendedor_id" ColumnName="vendedor_id" />
+                <ScalarProperty Name="tipo_factura_id" ColumnName="tipo_factura_id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marcas">
+            <EntityTypeMapping TypeName="InvenSyncModel.marcas">
+              <MappingFragment StoreEntitySet="marcas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_marca" ColumnName="nombre_marca" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="migrations">
+            <EntityTypeMapping TypeName="InvenSyncModel.migrations">
+              <MappingFragment StoreEntitySet="migrations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="migration" ColumnName="migration" />
+                <ScalarProperty Name="batch" ColumnName="batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="password_resets">
+            <EntityTypeMapping TypeName="InvenSyncModel.password_resets">
+              <MappingFragment StoreEntitySet="password_resets">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="InvenSyncModel.productos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="codigo_original" ColumnName="codigo_original" />
+                <ScalarProperty Name="codigo_alterno" ColumnName="codigo_alterno" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio_compra" ColumnName="precio_compra" />
+                <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
+                <ScalarProperty Name="aplicacion" ColumnName="aplicacion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="unidad_medida" ColumnName="unidad_medida" />
+                <ScalarProperty Name="numero_rack" ColumnName="numero_rack" />
+                <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+                <ScalarProperty Name="marca_id" ColumnName="marca_id" />
+                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proveedores">
+            <EntityTypeMapping TypeName="InvenSyncModel.proveedores">
+              <MappingFragment StoreEntitySet="proveedores">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_proveedor" ColumnName="nombre_proveedor" />
+                <ScalarProperty Name="direccion_proveedor" ColumnName="direccion_proveedor" />
+                <ScalarProperty Name="telefono_proveedor" ColumnName="telefono_proveedor" />
+                <ScalarProperty Name="email_proveedor" ColumnName="email_proveedor" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="InvenSyncModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipos_facturas">
+            <EntityTypeMapping TypeName="InvenSyncModel.tipos_facturas">
+              <MappingFragment StoreEntitySet="tipos_facturas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo_factura_nombre" ColumnName="tipo_factura_nombre" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="InvenSyncModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="passwords" ColumnName="passwords" />
+                <ScalarProperty Name="remember_token" ColumnName="remember_token" />
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vendedores">
+            <EntityTypeMapping TypeName="InvenSyncModel.vendedores">
+              <MappingFragment StoreEntitySet="vendedores">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_vendedor" ColumnName="nombre_vendedor" />
+                <ScalarProperty Name="direccion_vendedor" ColumnName="direccion_vendedor" />
+                <ScalarProperty Name="telefono_vendedor" ColumnName="telefono_vendedor" />
+                <ScalarProperty Name="email_vendedor" ColumnName="email_vendedor" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="InvenSyncModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="InvenSyncModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="InvenSyncModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InvenSyncModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvenSyncModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InvenSyncModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvenSyncModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InvenSyncModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InvenSyncModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
