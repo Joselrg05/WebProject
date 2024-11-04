@@ -1,0 +1,67 @@
+﻿@model List<CapaDatoWeb.Modelado.productos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string descripcion = "Productos";
+    int i = 1;
+}
+<h1 class="panel-heading mt-3"><strong>@descripcion</strong></h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="index.html">Interface</a></li>
+    <li class="breadcrumb-item"><a href="index.html">Bodega</a></li>
+    <li class="breadcrumb-item active">Producto</li>
+</ol>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.ActionLink(" + Agregar", "Crear", "Producto", htmlAttributes: new { @class = "btn btn-success" })
+                    </div>
+                </div>
+                <hr>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="success">
+                            <th class="text-center">#</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Código</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Categoria</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">Precio Compra</th>
+                            <th class="text-center">Precio Venta</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center"><strong>@i</strong></td>
+                                <td>@item.id</td>
+                                <td>@item.codigo_original</td>
+                                <td>@item.descripcion</td>
+                                <td>@item.categorias.nombre</td>
+                                <td>@item.cantidad</td>
+                                <td>@item.precio_compra</td>
+                                <td>@item.precio_venta</td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        @Html.ActionLink(" ", "Editar", "Producto", new { id = item.id }, htmlAttributes: new { @class = "btn btn-success glyphicon glyphicon-edit" })
+                                        @Html.ActionLink(" ", "Eliminar", "Producto", new { id = item.id }, htmlAttributes: new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                                    </div>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
