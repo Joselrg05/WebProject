@@ -11,9 +11,7 @@ namespace CapaDatoWeb.Modelado
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class marcas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +19,7 @@ namespace CapaDatoWeb.Modelado
         {
             this.productos = new HashSet<productos>();
         }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    
         public int id { get; set; }
         public string nombre_marca { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }

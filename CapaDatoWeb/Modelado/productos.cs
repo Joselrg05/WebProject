@@ -27,15 +27,14 @@ namespace CapaDatoWeb.Modelado
         public Nullable<int> cantidad { get; set; }
         public Nullable<decimal> precio_compra { get; set; }
         public Nullable<decimal> precio_venta { get; set; }
-        public string aplicacion { get; set; }
         public string descripcion { get; set; }
         public string unidad_medida { get; set; }
-        public Nullable<int> numero_rack { get; set; }
         public Nullable<int> categoria_id { get; set; }
         public Nullable<int> marca_id { get; set; }
         public Nullable<int> proveedor_id { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
+        public string urlImagen { get; set; }
     
         public virtual categorias categorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

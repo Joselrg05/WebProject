@@ -11,13 +11,9 @@ namespace CapaDatoWeb.Modelado
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class migrations
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         public string migration { get; set; }
         public Nullable<int> batch { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InvenSyncModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InvenSyncModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="categorias">
           <Key>
             <PropertyRef Name="id" />
@@ -128,15 +128,14 @@
           <Property Name="cantidad" Type="int" />
           <Property Name="precio_compra" Type="decimal" Precision="18" Scale="2" />
           <Property Name="precio_venta" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="aplicacion" Type="varchar(max)" />
           <Property Name="descripcion" Type="varchar(max)" />
           <Property Name="unidad_medida" Type="varchar" MaxLength="10" />
-          <Property Name="numero_rack" Type="int" />
           <Property Name="categoria_id" Type="int" />
           <Property Name="marca_id" Type="int" />
           <Property Name="proveedor_id" Type="int" />
           <Property Name="created_at" Type="datetime" />
           <Property Name="updated_at" Type="datetime" />
+          <Property Name="urlImagen" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="proveedores">
           <Key>
@@ -435,8 +434,7 @@
             <End Role="productos" EntitySet="productos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InvenSyncModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -578,10 +576,8 @@
           <Property Name="cantidad" Type="Int32" />
           <Property Name="precio_compra" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="precio_venta" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="aplicacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="unidad_medida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="numero_rack" Type="Int32" />
           <Property Name="categoria_id" Type="Int32" />
           <Property Name="marca_id" Type="Int32" />
           <Property Name="proveedor_id" Type="Int32" />
@@ -592,6 +588,7 @@
           <NavigationProperty Name="factura_producto_venta" Relationship="Self.FK__factura_p__produ__09A971A2" FromRole="productos" ToRole="factura_producto_venta" />
           <NavigationProperty Name="marcas" Relationship="Self.FK__productos__marca__70DDC3D8" FromRole="productos" ToRole="marcas" />
           <NavigationProperty Name="proveedores" Relationship="Self.FK__productos__prove__71D1E811" FromRole="productos" ToRole="proveedores" />
+          <Property Name="urlImagen" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="proveedores">
           <Key>
@@ -1036,16 +1033,15 @@
           <EntitySetMapping Name="productos">
             <EntityTypeMapping TypeName="InvenSyncModel.productos">
               <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="urlImagen" ColumnName="urlImagen" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="codigo_original" ColumnName="codigo_original" />
                 <ScalarProperty Name="codigo_alterno" ColumnName="codigo_alterno" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
                 <ScalarProperty Name="precio_compra" ColumnName="precio_compra" />
                 <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
-                <ScalarProperty Name="aplicacion" ColumnName="aplicacion" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="unidad_medida" ColumnName="unidad_medida" />
-                <ScalarProperty Name="numero_rack" ColumnName="numero_rack" />
                 <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
                 <ScalarProperty Name="marca_id" ColumnName="marca_id" />
                 <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />

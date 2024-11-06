@@ -11,13 +11,9 @@ namespace CapaDatoWeb.Modelado
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class factura_producto_venta
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         public Nullable<decimal> cantidad { get; set; }
         public Nullable<decimal> subtotal { get; set; }
